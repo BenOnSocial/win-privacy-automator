@@ -51,7 +51,7 @@ Execute the main script from your terminal:
 python src/optimize_privacy.py
 ```
 
-_Note: Do not touch your mouse or keyboard while the script is running. The automation requires active window focus to toggle the UI elements._
+**_Note: Do not touch your mouse or keyboard while the script is running. The automation requires active window focus to toggle the UI elements._**
 
 ## 🧠 How It Works (Technical Approach)
 
@@ -61,6 +61,10 @@ Unlike legacy Win32 applications, the Windows Settings app does not expose stand
 2. Attaches `pywinauto` to the `SystemSettings.exe` process.
 3. Uses custom wrapper functions to wait for specific UI elements to render.
 4. Evaluates the `TogglePattern` of specific buttons (e.g., "Send optional diagnostic data") and switches them off if currently active.
+
+### Diagnostics & feedback
+
+![Screenshot of the Windows 11 Settings > Privacy & security > Diagnostics & feedback settings window.](./img/diagnostics_and_feedback.jpg)
 
 ## ⚠️ Disclaimer
 

@@ -28,6 +28,9 @@ def click_button(window, group_title_re, button_title_re):
 
     button.click_input()
 
+def select_combobox_item(window, combobox_item_title):
+    combobox = window.child_window(title_re="Feedback frequency", control_type="ComboBox")
+    combobox.select(combobox_item_title)
 
 def main():
     # Navigate directly to the Privacy & Security > Diagnostics & feedback window.
@@ -45,6 +48,9 @@ def main():
 
     # Delete existing diagnostic data.
     click_button(window=settings_window, group_title_re="Delete diagnostic data", button_title_re="Delete")
+
+    # Disable feedback requests
+    select_combobox_item(window=settings_window, combobox_item_title="Never")
 
 if __name__ == "__main__":
     main()
