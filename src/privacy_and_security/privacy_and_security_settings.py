@@ -1,8 +1,11 @@
 import os
+import logging
 from enum import Enum
 from pywinauto import Desktop
-
 import control_type
+
+
+logger = logging.getLogger(__name__)
 
 
 class Page(object):
@@ -93,6 +96,8 @@ class DiagnosticsAndFeedbackPage(Page):
         )
 
     def __enter__(self):
+        logger.info("Opening Diagnostics & feedback settings...")
+
         super().__enter__()
 
         # Pre-locate groups.

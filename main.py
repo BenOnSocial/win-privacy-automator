@@ -1,11 +1,20 @@
+import logging
 import os
-from privacy_and_security_settings import DiagnosticsAndFeedbackPage
-from privacy_and_security_settings import RecommendationsAndOffersPage
-from privacy_and_security_settings import SearchPage
-from privacy_and_security_settings import SpeechPage
+from privacy_and_security.privacy_and_security_settings import (
+    DiagnosticsAndFeedbackPage,
+)
+from privacy_and_security.privacy_and_security_settings import (
+    RecommendationsAndOffersPage,
+)
+from privacy_and_security.privacy_and_security_settings import SearchPage
+from privacy_and_security.privacy_and_security_settings import SpeechPage
+
+logger = logging.getLogger(__name__)
 
 
 def main():
+    logger.info("Configuring privacy settings...")
+
     with DiagnosticsAndFeedbackPage() as settings:
         settings.enable_send_optional_diagnostics_data = False
         settings.enable_improve_language_recognition_and_suggestions = False
@@ -30,6 +39,8 @@ def main():
 
     with SpeechPage() as settings:
         settings.enable_online_speech_recognition = False
+
+    logger.info("Finished.")
 
 
 if __name__ == "__main__":
