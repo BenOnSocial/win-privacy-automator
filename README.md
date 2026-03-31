@@ -64,7 +64,7 @@ Unlike legacy Win32 applications, the Windows Settings app does not expose stand
 
 ### Diagnostics & feedback
 
-![Screenshot of the Windows 11 Settings > Privacy & security > Diagnostics & feedback settings window.](./img/diagnostics_and_feedback.jpg)
+https://github.com/user-attachments/assets/f4ceb401-0145-4a4f-9f4d-2a1b5e649cb2
 
 ## ⚠️ Disclaimer
 
