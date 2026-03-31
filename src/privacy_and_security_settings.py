@@ -184,40 +184,6 @@ class DiagnosticsAndFeedbackPage(Page):
         item.iface_selection_item.Select()
 
 
-class SpeechPage(Page):
-    def __init__(self):
-        super().__init__(page_path="ms-settings:privacy-speech")
-
-        self._online_speech_recognition_auto_id = (
-            "SystemSettings_Privacy_Speech_AllowSpeechServices_ToggleSwitch"
-        )
-
-    def __enter__(self):
-        super().__enter__()
-
-        # Pre-locate groups.
-        self._online_speech_recognition_group = self._window.child_window(
-            title="Online speech recognition", control_type="Group"
-        )
-
-        return self
-
-    @property
-    def enable_online_speech_recognition(self):
-        return self._get_toggle_state(
-            self._online_speech_recognition_group,
-            auto_id=self._online_speech_recognition_auto_id,
-        )
-
-    @enable_online_speech_recognition.setter
-    def enable_online_speech_recognition(self, value):
-        self._set_toggle_state(
-            parent=self._online_speech_recognition_group,
-            auto_id=self._online_speech_recognition_auto_id,
-            new_state=value,
-        )
-
-
 class RecommendationsAndOffersPage(Page):
     def __init__(self):
         super().__init__(page_path="ms-settings:privacy-general")
@@ -335,5 +301,39 @@ class RecommendationsAndOffersPage(Page):
         self._set_toggle_state(
             parent=self._window,
             auto_id=self._enable_advertising_id_auto_id,
+            new_state=value,
+        )
+
+
+class SpeechPage(Page):
+    def __init__(self):
+        super().__init__(page_path="ms-settings:privacy-speech")
+
+        self._online_speech_recognition_auto_id = (
+            "SystemSettings_Privacy_Speech_AllowSpeechServices_ToggleSwitch"
+        )
+
+    def __enter__(self):
+        super().__enter__()
+
+        # Pre-locate groups.
+        self._online_speech_recognition_group = self._window.child_window(
+            title="Online speech recognition", control_type="Group"
+        )
+
+        return self
+
+    @property
+    def enable_online_speech_recognition(self):
+        return self._get_toggle_state(
+            self._online_speech_recognition_group,
+            auto_id=self._online_speech_recognition_auto_id,
+        )
+
+    @enable_online_speech_recognition.setter
+    def enable_online_speech_recognition(self, value):
+        self._set_toggle_state(
+            parent=self._online_speech_recognition_group,
+            auto_id=self._online_speech_recognition_auto_id,
             new_state=value,
         )
