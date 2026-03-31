@@ -75,5 +75,3 @@ This tool interacts directly with your operating system's UI. It is provided as-
 1. **"Idempotent Execution"**: Using this term proves you understand modern infrastructure-as-code and automation principles (scripts should be safe to run multiple times without breaking things).
 2. **"UIA Backend" & "UWP"**: Shows you understand the deep technical differences between old Windows software (Win32) and modern Windows apps (Universal Windows Platform).
 3. **"Automated workstation provisioning"**: Frames the project not as a hobby script, but as an enterprise IT/DevOps tool.
-
-**Next step:** Create the repo, commit this README, and run `os.system("start ms-settings:privacy-feedback")` in a Python terminal to start mapping out the UI elements with `pywinauto`. Let me know when you're ready for the next portfolio piece!
