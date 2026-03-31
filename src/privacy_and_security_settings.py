@@ -93,10 +93,10 @@ class DiagnosticsAndFeedbackPage(Page):
     def __init__(self):
         super().__init__(page_path="ms-settings:privacy-feedback")
 
-        self._send_optional_diagnostic_data_auto_id = (
+        self._enable_send_optional_diagnostic_data_auto_id = (
             "SystemSettings_Privacy_Diagnostic_Data_Toggle_2_ToggleSwitch"
         )
-        self._improve_language_recognition_auto_id = (
+        self._enable_improve_language_recognition_auto_id = (
             "SystemSettings_Privacy_ImproveInkType_Toggle_2_ToggleSwitch"
         )
         self._enable_diagnostics_data_viewer_auto_id = (
@@ -128,38 +128,38 @@ class DiagnosticsAndFeedbackPage(Page):
         return self
 
     @property
-    def send_optional_diagnostics_data(self):
+    def enable_send_optional_diagnostics_data(self):
         return self._get_toggle_state_from_collapsable_group(
             parent=self._diagnostics_data_group,
-            auto_id=self._send_optional_diagnostic_data_auto_id,
+            auto_id=self._enable_send_optional_diagnostic_data_auto_id,
         )
 
-    @send_optional_diagnostics_data.setter
-    def send_optional_diagnostics_data(self, value):
+    @enable_send_optional_diagnostics_data.setter
+    def enable_send_optional_diagnostics_data(self, value):
         self._set_toggle_state_from_collapsable_group(
             parent=self._diagnostics_data_group,
-            auto_id=self._send_optional_diagnostic_data_auto_id,
+            auto_id=self._enable_send_optional_diagnostic_data_auto_id,
             new_state=value,
         )
 
     @property
-    def improve_language_recognition_and_suggestions(self):
-        if not self.send_optional_diagnostics_data:
+    def enable_improve_language_recognition_and_suggestions(self):
+        if not self.enable_send_optional_diagnostics_data:
             return False
 
         return self._get_toggle_state_from_collapsable_group(
             parent=self._improve_inking_and_typing_group,
-            auto_id=self._improve_language_recognition_auto_id,
+            auto_id=self._enable_improve_language_recognition_auto_id,
         )
 
-    @improve_language_recognition_and_suggestions.setter
-    def improve_language_recognition_and_suggestions(self, value):
-        if not self.send_optional_diagnostics_data:
+    @enable_improve_language_recognition_and_suggestions.setter
+    def enable_improve_language_recognition_and_suggestions(self, value):
+        if not self.enable_send_optional_diagnostics_data:
             return  # Send optional diagnostic data is directly linked to the Improve inking and typing setting. If Send optional diagnostic data is disabled, this setting can't be toggled.
 
         self._set_toggle_state_from_collapsable_group(
             parent=self._improve_inking_and_typing_group,
-            auto_id=self._improve_language_recognition_auto_id,
+            auto_id=self._enable_improve_language_recognition_auto_id,
             new_state=value,
         )
 
@@ -227,16 +227,16 @@ class RecommendationsAndOffersPage(Page):
         self._enable_personalized_offers_auto_id = (
             "SystemSettings_Privacy_TailoredExperiences2_ToggleSwitch"
         )
-        self._allow_language_list_access_auto_id = (
+        self._enable_allow_language_list_access_auto_id = (
             "SystemSettings_Language_Web_Content_Control_ToggleSwitch"
         )
         self._enable_improve_start_and_search_results_auto_id = (
             "SystemSettings_Privacy_StoreAppUsage_ToggleSwitch"
         )
-        self._show_notifications_in_settings_auto_id = (
+        self._enable_show_notifications_in_settings_auto_id = (
             "SystemSettings_Privacy_EnableAccountNotificationsInSettings_ToggleSwitch"
         )
-        self._show_recommendations_and_offers_in_settings_auto_id = (
+        self._enable_recommendations_and_offers_in_settings_auto_id = (
             "SystemSettings_Privacy_EnableSuggestionsInSettings_ToggleSwitch"
         )
         self._enable_advertising_id_auto_id = (
@@ -267,16 +267,16 @@ class RecommendationsAndOffersPage(Page):
         )
 
     @property
-    def allow_language_list_access(self):
+    def enable_allow_language_list_access(self):
         return self._get_toggle_state(
-            parent=self._window, auto_id=self._allow_language_list_access_auto_id
+            parent=self._window, auto_id=self._enable_allow_language_list_access_auto_id
         )
 
-    @allow_language_list_access.setter
-    def allow_language_list_access(self, value):
+    @enable_allow_language_list_access.setter
+    def enable_allow_language_list_access(self, value):
         self._set_toggle_state(
             parent=self._window,
-            auto_id=self._allow_language_list_access_auto_id,
+            auto_id=self._enable_allow_language_list_access_auto_id,
             new_state=value,
         )
 
@@ -296,31 +296,31 @@ class RecommendationsAndOffersPage(Page):
         )
 
     @property
-    def show_notifications_in_settings(self):
+    def enable_show_notifications_in_settings(self):
         return self._get_toggle_state(
             parent=self._window,
-            auto_id=self._show_notifications_in_settings_auto_id,
+            auto_id=self._enable_show_notifications_in_settings_auto_id,
         )
 
-    @show_notifications_in_settings.setter
-    def show_notifications_in_settings(self, value):
+    @enable_show_notifications_in_settings.setter
+    def enable_show_notifications_in_settings(self, value):
         self._set_toggle_state(
             parent=self._window,
-            auto_id=self._show_notifications_in_settings_auto_id,
+            auto_id=self._enable_show_notifications_in_settings_auto_id,
             new_state=value,
         )
 
     @property
-    def show_recommendations_and_offers_in_settings(self):
+    def enable_recommendations_and_offers_in_settings(self):
         return self._get_toggle_state(
             parent=self._window, auto_id=self._show_notifications_in_settings_auto_id
         )
 
-    @show_recommendations_and_offers_in_settings.setter
-    def show_recommendations_and_offers_in_settings(self, value):
+    @enable_recommendations_and_offers_in_settings.setter
+    def enable_recommendations_and_offers_in_settings(self, value):
         self._set_toggle_state(
             parent=self._window,
-            auto_id=self._show_recommendations_and_offers_in_settings_auto_id,
+            auto_id=self._enable_recommendations_and_offers_in_settings_auto_id,
             new_state=value,
         )
 
