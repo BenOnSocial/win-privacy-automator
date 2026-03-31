@@ -51,7 +51,7 @@ Execute the main script from your terminal:
 python src/optimize_privacy.py
 ```
 
-**_Note: Do not touch your mouse or keyboard while the script is running. The automation requires active window focus to toggle the UI elements._**
+**Note:** _Do not touch your mouse or keyboard while the script is running. The automation requires active window focus to toggle the UI elements._
 
 ## 🧠 How It Works (Technical Approach)
 
