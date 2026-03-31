@@ -1,19 +1,28 @@
 import os
-from diagnostics_and_feedback_page import DiagnosticsAndFeedbackPage
+from privacy_and_security_settings import DiagnosticsAndFeedbackPage
+from privacy_and_security_settings import RecommendationsAndOffersPage
+from privacy_and_security_settings import SpeechPage
+
 
 def main():
     with DiagnosticsAndFeedbackPage() as settings:
-        # Turn OFF optional diagnostic data collection.
         settings.send_optional_diagnostics_data = False
-
-        # Turn OFF Diagnostic Data Viewer.
+        settings.improve_language_recognition_and_suggestions = False
         settings.enable_diagnostics_data_viewer = False
-
-        # Delete existing diagnostic data.
         settings.delete_diagnostics_data()
-
-        # Disable feedback requests
         settings.feedback_frequency = "Never"
+
+    with RecommendationsAndOffersPage() as settings:
+        settings.enable_personalized_offers = False
+        settings.allow_language_list_access = False
+        settings.enable_improve_start_and_search_results = False
+        settings.show_notifications_in_settings = False
+        settings.show_recommendations_and_offers_in_settings = False
+        settings.enable_advertising_id = False
+
+    with SpeechPage() as settings:
+        settings.enable_online_speech_recognition = False
+
 
 if __name__ == "__main__":
     main()
