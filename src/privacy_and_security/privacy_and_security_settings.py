@@ -3,6 +3,9 @@ import logging
 from enum import Enum
 from pywinauto import Desktop
 import control_type
+from privacy_and_security import CHECKMARK
+from privacy_and_security import DISABLED
+from privacy_and_security import ENABLED
 
 
 logger = logging.getLogger(__name__)
@@ -96,7 +99,7 @@ class DiagnosticsAndFeedbackPage(Page):
         )
 
     def __enter__(self):
-        logger.info("Opening Diagnostics & feedback settings...")
+        logger.info("\nDiagnostics & feedback")
 
         super().__enter__()
 
@@ -130,6 +133,10 @@ class DiagnosticsAndFeedbackPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Send optional diagnostic data. {ENABLED if value else DISABLED}"
+        )
+
     @property
     def enable_improve_language_recognition_and_suggestions(self):
         if not self.enable_send_optional_diagnostics_data:
@@ -151,6 +158,10 @@ class DiagnosticsAndFeedbackPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Improve the language recognition and suggestion capabilities of Microsoft apps and services. ({ENABLED if value else DISABLED})"
+        )
+
     @property
     def enable_diagnostics_data_viewer(self):
         return self._get_toggle_state_from_collapsable_group(
@@ -166,6 +177,10 @@ class DiagnosticsAndFeedbackPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Turn on the Diagnostic Data Viewer. {ENABLED if value else DISABLED}"
+        )
+
     def delete_diagnostics_data(self):
         button = self._delete_diagnostics_data_group.child_window(
             auto_id=self._delete_diagnostic_data_auto_id
@@ -176,6 +191,8 @@ class DiagnosticsAndFeedbackPage(Page):
             button.wait("visible", timeout=3)
 
         button.iface_invoke.Invoke()
+
+        logger.info(f"{CHECKMARK}  Deleted diagnostic data.")
 
     @property
     def feedback_frequency(self):
@@ -205,6 +222,8 @@ class DiagnosticsAndFeedbackPage(Page):
         item = combobox.child_window(title=value, control_type=control_type.LIST_ITEM)
         item.iface_selection_item.Select()
 
+        logger.info(f"{CHECKMARK}  Feedback frequency set to \033[32m{value}\033[0m.")
+
 
 class RecommendationsAndOffersPage(Page):
     def __init__(self):
@@ -230,6 +249,8 @@ class RecommendationsAndOffersPage(Page):
         )
 
     def __enter__(self):
+        logger.info("\nRecommendations & offers")
+
         super().__enter__()
 
         # Pre-locate groups.
@@ -252,6 +273,10 @@ class RecommendationsAndOffersPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Personalized offers. {ENABLED if value else DISABLED}"
+        )
+
     @property
     def enable_allow_language_list_access(self):
         return self._get_toggle_state(
@@ -264,6 +289,10 @@ class RecommendationsAndOffersPage(Page):
             parent=self._window,
             auto_id=self._enable_allow_language_list_access_auto_id,
             new_state=value,
+        )
+
+        logger.info(
+            f"{CHECKMARK}  Allow websites to access my language list. {ENABLED if value else DISABLED}"
         )
 
     @property
@@ -281,6 +310,10 @@ class RecommendationsAndOffersPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Improve Start and search results. {ENABLED if value else DISABLED}"
+        )
+
     @property
     def enable_show_notifications_in_settings(self):
         return self._get_toggle_state(
@@ -294,6 +327,10 @@ class RecommendationsAndOffersPage(Page):
             parent=self._window,
             auto_id=self._enable_show_notifications_in_settings_auto_id,
             new_state=value,
+        )
+
+        logger.info(
+            f"{CHECKMARK}  Show notifications in Settings. {ENABLED if value else DISABLED}"
         )
 
     @property
@@ -310,6 +347,10 @@ class RecommendationsAndOffersPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Recommendations and offers in Settings. {ENABLED if value else DISABLED}"
+        )
+
     @property
     def enable_advertising_id(self):
         return self._get_toggle_state(
@@ -323,6 +364,8 @@ class RecommendationsAndOffersPage(Page):
             auto_id=self._enable_advertising_id_auto_id,
             new_state=value,
         )
+
+        logger.info(f"{CHECKMARK}  Advertising ID. {ENABLED if value else DISABLED}")
 
 
 class SearchPage(Page):
@@ -343,6 +386,8 @@ class SearchPage(Page):
         )
 
     def __enter__(self):
+        logger.info("\nSearch")
+
         super().__enter__()
 
         # Pre-locate groups.
@@ -369,10 +414,14 @@ class SearchPage(Page):
             new_state=value,
         )
 
+        logger.info(f"{CHECKMARK}  Search history. {ENABLED if value else DISABLED}")
+
     def clear_device_search_history(self):
         self._press_button(
             parent=self._clear_device_search_history_group, title="Clear"
         )
+
+        logger.info(f"{CHECKMARK}  Cleared device search history.")
 
     @property
     def enable_show_search_highlights(self):
@@ -386,6 +435,10 @@ class SearchPage(Page):
             parent=self._window,
             auto_id=self._enable_show_search_highlights_auto_id,
             new_state=value,
+        )
+
+        logger.info(
+            f"{CHECKMARK}  Show search highlights. {ENABLED if value else DISABLED}"
         )
 
     @property
@@ -403,6 +456,10 @@ class SearchPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Search my Microsoft account. {ENABLED if value else DISABLED}"
+        )
+
     @property
     def enable_search_work_or_home_account(self):
         return self._get_toggle_state(
@@ -418,6 +475,10 @@ class SearchPage(Page):
             new_state=value,
         )
 
+        logger.info(
+            f"{CHECKMARK}  Search my Work or School account. {ENABLED if value else DISABLED}"
+        )
+
 
 class SpeechPage(Page):
     def __init__(self):
@@ -428,6 +489,8 @@ class SpeechPage(Page):
         )
 
     def __enter__(self):
+        logger.info("\nSpeech")
+
         super().__enter__()
 
         # Pre-locate groups.
@@ -450,4 +513,8 @@ class SpeechPage(Page):
             parent=self._online_speech_recognition_group,
             auto_id=self._online_speech_recognition_auto_id,
             new_state=value,
+        )
+
+        logger.info(
+            f"{CHECKMARK}  Online speech recognition. {ENABLED if value else DISABLED}"
         )
