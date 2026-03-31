@@ -2,12 +2,7 @@ import os
 from enum import Enum
 from pywinauto import Desktop
 
-
-class ControlType(Enum):
-    BUTTON = "Button"
-    COMBO_BOX = "ComboBox"
-    GROUP = "Group"
-    LIST_ITEM = "ListItem"
+import control_type
 
 
 class Page(object):
@@ -27,9 +22,7 @@ class Page(object):
             self._window.close()
 
     def _get_group(self, title):
-        return self._window.child_window(
-            title=title, control_type=ControlType.GROUP.value
-        )
+        return self._window.child_window(title=title, control_type=control_type.GROUP)
 
     def _expand_group(self, group):
         expand_button = group.child_window(title="Show more settings")
@@ -41,26 +34,20 @@ class Page(object):
         button = None
 
         if title:
-            button = parent.child_window(
-                title=title, control_type=ControlType.BUTTON.value
-            )
+            button = parent.child_window(title=title, control_type=control_type.BUTTON)
         elif auto_id:
             button = parent.child_window(
-                auto_id=auto_id, control_type=ControlType.BUTTON.value
+                auto_id=auto_id, control_type=control_type.BUTTON
             )
 
         button.iface_invoke.Invoke()
 
     def _get_toggle_state(self, parent, auto_id):
-        toggle = parent.child_window(
-            auto_id=auto_id, control_type=ControlType.BUTTON.value
-        )
+        toggle = parent.child_window(auto_id=auto_id, control_type=control_type.BUTTON)
         return toggle.get_toggle_state() == 1
 
     def _get_toggle_state_from_collapsable_group(self, parent, auto_id):
-        toggle = parent.child_window(
-            auto_id=auto_id, control_type=ControlType.BUTTON.value
-        )
+        toggle = parent.child_window(auto_id=auto_id, control_type=control_type.BUTTON)
 
         if not toggle.exists() or not toggle.is_visible():
             self._expand_group(parent)
@@ -69,17 +56,13 @@ class Page(object):
         return toggle.get_toggle_state() == 1
 
     def _set_toggle_state(self, parent, auto_id, new_state):
-        toggle = parent.child_window(
-            auto_id=auto_id, control_type=ControlType.BUTTON.value
-        )
+        toggle = parent.child_window(auto_id=auto_id, control_type=control_type.BUTTON)
         current_state = toggle.get_toggle_state() == 1
         if current_state != new_state:
             toggle.iface_toggle.Toggle()
 
     def _set_toggle_state_from_collapsable_group(self, parent, auto_id, new_state):
-        toggle = parent.child_window(
-            auto_id=auto_id, control_type=ControlType.BUTTON.value
-        )
+        toggle = parent.child_window(auto_id=auto_id, control_type=control_type.BUTTON)
         if not toggle.exists() or not toggle.is_visible():
             self._expand_group(parent)
             toggle.wait("visible", timeout=3)
@@ -193,7 +176,7 @@ class DiagnosticsAndFeedbackPage(Page):
     def feedback_frequency(self):
         combobox = self.feedback_group.child_window(
             auto_id=self._feedback_frequency_auto_id,
-            control_type=ControlType.COMBO_BOX.value,
+            control_type=control_type.COMBO_BOX,
         )
 
         selection_pattern = combobox.iface_selection
@@ -208,15 +191,13 @@ class DiagnosticsAndFeedbackPage(Page):
     def feedback_frequency(self, value):
         combobox = self.feedback_group.child_window(
             auto_id=self._feedback_frequency_auto_id,
-            control_type=ControlType.COMBO_BOX.value,
+            control_type=control_type.COMBO_BOX,
         )
 
         if combobox.get_expand_state() == 0:
             combobox.iface_expand_collapse.Expand()
 
-        item = combobox.child_window(
-            title=value, control_type=ControlType.LIST_ITEM.value
-        )
+        item = combobox.child_window(title=value, control_type=control_type.LIST_ITEM)
         item.iface_selection_item.Select()
 
 
