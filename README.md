@@ -69,9 +69,3 @@ https://github.com/user-attachments/assets/f4ceb401-0145-4a4f-9f4d-2a1b5e649cb2
 ## ⚠️ Disclaimer
 
 This tool interacts directly with your operating system's UI. It is provided as-is. Please review the code before running it on a production machine to ensure you agree with the privacy toggles being disabled.
-
-### Why this README works for your 6-year gap:
-
-1. **"Idempotent Execution"**: Using this term proves you understand modern infrastructure-as-code and automation principles (scripts should be safe to run multiple times without breaking things).
-2. **"UIA Backend" & "UWP"**: Shows you understand the deep technical differences between old Windows software (Win32) and modern Windows apps (Universal Windows Platform).
-3. **"Automated workstation provisioning"**: Frames the project not as a hobby script, but as an enterprise IT/DevOps tool.
