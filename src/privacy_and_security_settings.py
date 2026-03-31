@@ -18,10 +18,23 @@ class Page(object):
         if self._window and self._window.exists():
             self._window.close()
 
+    def _get_group(self, title):
+        return self._window.child_window(title=title, control_type="Group")
+
     def _expand_group(self, group):
         expand_btn = group.child_window(title="Show more settings")
         if expand_btn.exists():
             expand_btn.click_input()
+
+    def _press_button(self, parent, title=None, auto_id=None):
+        button = None
+
+        if title:
+            button = parent.child_window(title=title, control_type="Button")
+        elif auto_id:
+            button = parent.child_window(auto_id=auto_id, control_type="Button")
+
+        button.iface_invoke.Invoke()
 
     def _get_toggle_state(self, parent, auto_id):
         toggle = parent.child_window(auto_id=auto_id, control_type="Button")
@@ -301,6 +314,100 @@ class RecommendationsAndOffersPage(Page):
         self._set_toggle_state(
             parent=self._window,
             auto_id=self._enable_advertising_id_auto_id,
+            new_state=value,
+        )
+
+
+class SearchPage(Page):
+    def __init__(self):
+        super().__init__(page_path="ms-settings:search")
+
+        self._enable_search_history_auto_id = (
+            "SystemSettings_Search_MyDeviceHistory_ToggleSwitch"
+        )
+        self._enable_show_search_highlights_auto_id = (
+            "SystemSettings_Search_DynamicSearchBox_ToggleSwitch"
+        )
+        self._enable_search_microsoft_account_auto_id = (
+            "SystemSettings_Search_CloudSearchMSA_ToggleSwitch"
+        )
+        self._enable_search_work_or_home_account_auto_id = (
+            "SystemSettings_Search_CloudSearchAAD_ToggleSwitch"
+        )
+
+    def __enter__(self):
+        super().__enter__()
+
+        # Pre-locate groups.
+        self._search_history_group = self._get_group(title="Search history")
+        self._clear_device_search_history_group = self._get_group(
+            title="Clear device search history"
+        )
+        self._search_my_accounts_group = self._get_group(title="Search my accounts")
+
+        return self
+
+    @property
+    def enable_search_history(self):
+        return self._get_toggle_state_from_collapsable_group(
+            parent=self._search_history_group,
+            auto_id=self._enable_search_history_auto_id,
+        )
+
+    @enable_search_history.setter
+    def enable_search_history(self, value):
+        self._set_toggle_state_from_collapsable_group(
+            parent=self._search_history_group,
+            auto_id=self._enable_search_history_auto_id,
+            new_state=value,
+        )
+
+    def clear_device_search_history(self):
+        self._press_button(
+            parent=self._clear_device_search_history_group, title="Clear"
+        )
+
+    @property
+    def enable_show_search_highlights(self):
+        return self._set_toggle_state(
+            parent=self._window, auto_id=self._enable_show_search_highlights_auto_id
+        )
+
+    @enable_show_search_highlights.setter
+    def enable_show_search_highlights(self, value):
+        self._set_toggle_state(
+            parent=self._window,
+            auto_id=self._enable_show_search_highlights_auto_id,
+            new_state=value,
+        )
+
+    @property
+    def enable_search_microsoft_account(self):
+        return self._get_toggle_state(
+            parent=self._search_my_accounts_group,
+            auto_id=self._enable_search_microsoft_account_auto_id,
+        )
+
+    @enable_search_microsoft_account.setter
+    def enable_search_microsoft_account(self, value):
+        self._set_toggle_state(
+            parent=self._search_my_accounts_group,
+            auto_id=self._enable_search_microsoft_account_auto_id,
+            new_state=value,
+        )
+
+    @property
+    def enable_search_work_or_home_account(self):
+        return self._get_toggle_state(
+            parent=self._search_my_accounts_group,
+            auto_id=self._enable_search_work_or_home_account_auto_id,
+        )
+
+    @enable_search_work_or_home_account.setter
+    def enable_search_work_or_home_account(self, value):
+        self._set_toggle_state(
+            parent=self._search_my_accounts_group,
+            auto_id=self._enable_search_work_or_home_account_auto_id,
             new_state=value,
         )
 
