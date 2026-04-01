@@ -4,6 +4,9 @@ An automated workstation provisioning tool built with Python and `pywinauto`.
 
 This script automates the tedious process of disabling Windows 11 telemetry, diagnostic data, and targeted advertising settings on a fresh OS installation. It directly targets the modern Universal Windows Platform (UWP) Settings app using the UIAutomation (`uia`) API.
 
+
+https://github.com/user-attachments/assets/0144429e-07ad-4b5a-aad9-ba327a139582
+
 ## 🎯 Purpose
 
 Manually toggling privacy settings after every Windows reinstall is time-consuming and prone to human error. This project serves two purposes:
@@ -61,10 +64,6 @@ Unlike legacy Win32 applications, the Windows Settings app does not expose stand
 2. Attaches `pywinauto` to the `SystemSettings.exe` process.
 3. Uses custom wrapper functions to wait for specific UI elements to render.
 4. Evaluates the `TogglePattern` of specific buttons (e.g., "Send optional diagnostic data") and switches them off if currently active.
-
-### Diagnostics & feedback
-
-https://github.com/user-attachments/assets/f4ceb401-0145-4a4f-9f4d-2a1b5e649cb2
 
 ## ⚠️ Disclaimer
 
