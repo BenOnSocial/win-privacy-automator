@@ -19,16 +19,16 @@ Manually toggling privacy settings after every Windows reinstall is time-consumi
 
 ## 🛠 Tech Stack
 
-- **Language:** Python 3.10+
+- **Language:** Python 3.13+
 - **Framework:** `pywinauto` (UIAutomation backend)
-- **OS Target:** Windows 10 / Windows 11
+- **OS Target:** Windows 11
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Windows 10 or 11 operating system.
-- Python 3.10 or higher installed.
+- Windows 11 operating system.
+- Python 3.13 or higher installed.
 - Ensure your display scaling is set to 100% for the most reliable UI automation (Standard Windows limitation for GUI testing).
 
 ### Installation
@@ -48,7 +48,7 @@ pip install -r requirements.txt
 Execute the main script from your terminal:
 
 ```powershell
-python src/optimize_privacy.py
+python run_app.py
 ```
 
 **Note:** _Do not touch your mouse or keyboard while the script is running. The automation requires active window focus to toggle the UI elements._
