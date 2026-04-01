@@ -1,10 +1,35 @@
 [build-system]
-requires = ["setuptools>=80.0"]
+requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "win-privacy-automator"
-version = "0.1.0"
+authors = [
+    {name = "Ben Tran"}
+]
+dynamic = [
+    "version",
+    "description",
+]
+license = "MIT"
+dependencies = ["pywinauto"]
+classifiers = [
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+keywords = [
+    "windows",
+    "privacy",
+    "automation",
+]
 
-[tool.setuptools.packages.find]
-where = ["src"]
+[project.urls]
+Issues = "https://github.com/benonsocial/win-privacy-automator/issues"
+Source = "https://github.com/benonsocial/win-privacy-automator"

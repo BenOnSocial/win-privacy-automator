@@ -1,5 +1,8 @@
 import logging
+import sys
 import os
+from pathlib import Path
+
 from privacy_and_security.privacy_and_security_settings import (
     DiagnosticsAndFeedbackPage,
 )
@@ -9,10 +12,18 @@ from privacy_and_security.privacy_and_security_settings import (
 from privacy_and_security.privacy_and_security_settings import SearchPage
 from privacy_and_security.privacy_and_security_settings import SpeechPage
 
-logger = logging.getLogger(__name__)
 
+def run_app():
+    # Add src/ to the PYTHONPATH since we're using a src project layout.
+    root_dir = Path(__file__).parent
+    sys.path.insert(0, str(root_dir / "src"))
 
-def main():
+    # Need to add ANSI support on Windows.
+    if os.name == "nt":
+        os.system("color")
+
+    logger = logging.getLogger(__name__)
+
     logger.info("Configuring privacy settings...")
 
     with DiagnosticsAndFeedbackPage() as settings:
@@ -44,4 +55,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        run_app()
+    except:
+        sys.exit(1)

@@ -2,7 +2,7 @@
 
 An automated workstation provisioning tool built with Python and `pywinauto`.
 
-This script automates the tedious process of disabling Windows 10/11 telemetry, diagnostic data, and targeted advertising settings on a fresh OS installation. It directly targets the modern Universal Windows Platform (UWP) Settings app using the UIAutomation (`uia`) API.
+This script automates the tedious process of disabling Windows 11 telemetry, diagnostic data, and targeted advertising settings on a fresh OS installation. It directly targets the modern Universal Windows Platform (UWP) Settings app using the UIAutomation (`uia`) API.
 
 ## 🎯 Purpose
 
