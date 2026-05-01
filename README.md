@@ -4,7 +4,6 @@ An automated workstation provisioning tool built with Python and `pywinauto`.
 
 This script automates the tedious process of disabling Windows 11 telemetry, diagnostic data, and targeted advertising settings on a fresh OS installation. It directly targets the modern Universal Windows Platform (UWP) Settings app using the UIAutomation (`uia`) API.
 
-
 https://github.com/user-attachments/assets/0144429e-07ad-4b5a-aad9-ba327a139582
 
 ## 🎯 Purpose
@@ -64,6 +63,63 @@ Unlike legacy Win32 applications, the Windows Settings app does not expose stand
 2. Attaches `pywinauto` to the `SystemSettings.exe` process.
 3. Uses custom wrapper functions to wait for specific UI elements to render.
 4. Evaluates the `TogglePattern` of specific buttons (e.g., "Send optional diagnostic data") and switches them off if currently active.
+
+## The Implementation
+
+A Page Object Model (POM) approach is used to logically isolate each settings screen. Settings that are toggled on/off are represented in code as Python `bool` properties to create an intuitive API.
+
+```mermaid
+classDiagram
+    class Page {
+        #string _page_path
+        #Desktop _window
+
+        #__enter__()
+        #__exit__()
+        #_get_group(title)
+        #_expand_group(group)
+        #_press_button(parent, title, auto_id)
+        #_get_toggle_state(parent, auto)
+        #_get_toggle_state_from_collapsable_group(parent, auto_id)
+        #_set_toggle_state(parent, auto_id, new_state)
+        #_set_toggle_state_from_collapsable_group(parent, auto_id, new_state)
+    }
+
+namespace privacy_and_security_settings {
+    class DiagnosticsAndFeedbackPage {
+      +bool enable_send_optional_diagnostics_data << property >>
+      +bool enable_improve_language_recognition_and_suggestions << property >>
+      +bool enable_diagnostics_data_viewer << property >>
+      +bool feedback_frequency << property >>
+      +delete_diagnostics_data()
+    }
+
+    class RecommendationsAndOffersPage {
+        +bool enable_personalized_offers << property >>
+        +bool enable_allow_language_list_access << property >>
+        +bool enable_improve_start_and_search_results << property >>
+        +bool enable_show_notifications_in_settings << property >>
+        +bool enable_recommendations_and_offers_in_settings << property >>
+        +bool enable_advertising_id << property >>
+    }
+    class SearchPage {
+        +bool enable_search_history << property >>
+        +bool enable_show_search_highlights << property >>
+        +bool enable_search_microsoft_account << property >>
+        +bool enable_search_work_or_home_account << property >>
+        +clear_device_search_history()
+    }
+    class SpeechPage {
+        +bool enable_online_speech_recognition << property >>
+    }
+
+}
+
+Page <|-- DiagnosticsAndFeedbackPage
+Page <|-- RecommendationsAndOffersPage
+Page <|-- SearchPage
+Page <|-- SpeechPage
+```
 
 ## ⚠️ Disclaimer
 
