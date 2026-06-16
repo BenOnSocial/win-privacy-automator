@@ -6,26 +6,26 @@ This script automates the tedious process of disabling Windows 11 telemetry, dia
 
 https://github.com/user-attachments/assets/0144429e-07ad-4b5a-aad9-ba327a139582
 
-## 🎯 Purpose
+## Purpose
 
 Manually toggling privacy settings after every Windows reinstall is time-consuming and prone to human error. This project serves two purposes:
 
 1. **Utility:** Instantly hardens local Windows privacy settings.
 2. **Technical Demonstration:** Showcases the ability to interact with complex, modern UWP applications, navigate dynamic UI trees, and verify element states using Python.
 
-## ✨ Key Features
+## Key Features
 
 - **Direct URI Navigation:** Bypasses manual Start Menu navigation by utilizing Windows URI schemes (`ms-settings:privacy-feedback`) to launch directly into the correct contexts.
 - **Idempotent Execution:** The script reads the current state of toggle switches (e.g., checking the `ToggleState` property). It only executes a click if the setting is currently enabled, preventing unintended re-enabling.
 - **UIA Backend:** Utilizes `pywinauto`'s `uia` backend to successfully map and control React Native/UWP desktop elements.
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **Language:** Python 3.13+
 - **Framework:** `pywinauto` (UIAutomation backend)
 - **OS Target:** Windows 11
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -55,7 +55,7 @@ python run_app.py
 
 **Note:** _Do not touch your mouse or keyboard while the script is running. The automation requires active window focus to toggle the UI elements._
 
-## 🧠 How It Works (Technical Approach)
+## How It Works (Technical Approach)
 
 Unlike legacy Win32 applications, the Windows Settings app does not expose standard control identifiers. This script:
 
@@ -121,6 +121,6 @@ Page <|-- SearchPage
 Page <|-- SpeechPage
 ```
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This tool interacts directly with your operating system's UI. It is provided as-is. Please review the code before running it on a production machine to ensure you agree with the privacy toggles being disabled.
